@@ -110,9 +110,12 @@ async def id_user(message: types.Message, state: FSMContext):
     answer = int(message.text)
     isregis = "not registered"
     db.create_table_drivers()
+    db.create_table_cars()
+    db.admin_add_cars(answer, isregis)
     db.admin_add_drivers(answer, isregis)
     await state.update_data(user_id=answer)
     await message.answer("Успешно добавлена", reply_markup=newMarkup)
+
     await state.reset_state()
 
 
@@ -213,7 +216,7 @@ async def order_day(message: types.Message):
     for order in orders:
         await message.answer(
             f"<b>все данные 🔽🔽🔽 </b>\n"
-            f"<b>ID Отчета: </b>{order.user_id} \n"
+            f"<b>ID Отчета: </b>{order.id} \n"
             f"<b>ID пользователя: </b>{order.user_id} \n"
             f"<b>Дата отчета : </b> {order.date_day} \n"
             f"<b>Сколько проехали км : </b> {order.count_day} \n"

@@ -185,13 +185,13 @@ async def reg_driver(message: types.Message):
             await RDriver.D1.set()
         elif isregisted1[0][0] == "registered":
             await message.answer(f"Вы уже регистрированы ", reply_markup=DriverMarkup)
-    if user_id in cars:
-        if regis == isregisted[0][0]:
-            await message.answer("Вы не регистрировали машину,выберите топлива : ", reply_markup=mainMenu1, reply=True)
 
     else:
         await message.answer("Ваша id не регистрирована!!!")
         await message.answer(f"Ваша id {message.from_user.id}")
+    if user_id in cars:
+        if regis == isregisted[0][0]:
+            await message.answer("Вы не регистрировали машину,выберите топлива : ", reply_markup=mainMenu1, reply=True)
 
 
 @dp.message_handler(text="Линии🛣")

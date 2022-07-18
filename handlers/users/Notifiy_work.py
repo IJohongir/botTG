@@ -6,6 +6,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQu
 from handlers.users.Drivers import get_keles, get_mirza_ulugbek, get_chilanzar, get_yunusobod
 from keyboards.default import LineMarkup, DriverMarkup
 from keyboards.default.markup import Stop_Next
+from keyboards.inline import mainMenu1
 from states import Way_work
 from loader import dp, db, bot
 from utils.misc.call_distance import calc_distance, choose_shortest
@@ -96,11 +97,28 @@ async def back_line4(message: types.Message, state: FSMContext):
 
 @dp.callback_query_handler(text_contains="work")
 async def road_notify_work(call: CallbackQuery, state: FSMContext):
+    carss = db.select_all_cars_id()
+    cars = [driver[0] for driver in carss]
     user_id = call.from_user.id
-    await state.update_data(driver_id=user_id)
-    await bot.delete_message(call.from_user.id, call.message.message_id)
-    await call.message.answer("Выберите линию", reply_markup=LineMarkup)
-    await Way_work.Ww1.set()
+    regis = "not registered"
+    isregisted = db.select_isregis_cars(user_id)
+
+    if user_id in cars:
+        if regis == isregisted[0]:
+            await call.message.answer(
+                "Вы не регистрированы,выберите топлива : ", reply_markup=mainMenu1, reply=True
+            )
+
+        elif isregisted[0] == "registered":
+            await state.update_data(driver_id=user_id)
+            await bot.delete_message(call.from_user.id, call.message.message_id)
+            await call.message.answer("Выберите линию", reply_markup=LineMarkup)
+            await Way_work.Ww1.set()
+
+    else:
+        await bot.delete_message(call.from_user.id, call.message.message_id)
+        await call.message.answer("Ваша id не регистрирована!!!")
+        await call.message.answer(f"Ваша id {call.from_user.id}")
 
 
 # USER1

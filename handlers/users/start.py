@@ -2,6 +2,7 @@ from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart, Command
 from aiogram.types import ReplyKeyboardRemove
 
+from keyboards.default import UserMarkup
 from loader import dp, db
 from states import UReg
 
@@ -24,7 +25,7 @@ async def bot_start(message: types.Message):
             )
             await UReg.U1.set()
         elif isregisted[0] == "registered":
-            await message.answer(f"Вы уже регистрованы ")
+            await message.answer(f"Вы уже регистрованы ", reply_markup=UserMarkup)
 
     else:
         await message.answer("Ваша id не регистрирована!!!")

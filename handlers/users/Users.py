@@ -106,6 +106,7 @@ async def phone_number(message: types.Message, state: FSMContext):
     db.create_table_users()
     db.add_user(first_name1, last_name1, phone_number1, name_line, isregistered, user_id)
     await message.answer("Вы успешно зарегистрированы", reply_markup=ReplyKeyboardRemove())
+    await message.answer("Зарегистеруйте и локацию дома", reply_markup=UserMarkup)
     await state.reset_state()
 
 
@@ -148,7 +149,7 @@ async def home_address(message: types.Message):
             await message.answer("Выберите линую ", reply_markup=mainMenu2)
         elif is_registed[0] == "registered":
             await message.answer("🔽", reply_markup=ReplyKeyboardRemove())
-            await message.answer("Вы уже отметили свой дом\n Хотите изменит ? ", reply_markup=YES_NO, )
+            await message.answer("Вы уже отметили свой дом\n Хотите изменит ? ", reply_markup=YES_NO)
     if not (user_id in users):
         db.add_users_loc(user_id, regis)
         await message.answer("Вы только что за регалис, нажмите ещё на 'Адрес дома🏠'")
