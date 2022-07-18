@@ -215,8 +215,8 @@ async def order_day(message: types.Message):
             f"<b>все данные 🔽🔽🔽 </b>\n"
             f"<b>ID Отчета: </b>{order.user_id} \n"
             f"<b>ID пользователя: </b>{order.user_id} \n"
-            f"<b>Дата отчета : </b> {order.date_day}"
-            f"<b>Сколько проехали км : </b> {order.count_day}"
+            f"<b>Дата отчета : </b> {order.date_day} \n"
+            f"<b>Сколько проехали км : </b> {order.count_day} \n"
             f"<b>Куда ходили ? : </b>{order.view_road} \n"
             f"<b>Расход топлива л/m³ : </b>{order.oil_day} \n"
         )
