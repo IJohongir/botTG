@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BOT_TOKEN = str(os.getenv(""))
+BOT_TOKEN = str(os.getenv("BOT_TOKEN"))
 admins = [
     557371080
 ]
