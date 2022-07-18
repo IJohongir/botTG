@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, ReplyKeyboardRemove
 
 from handlers.users.Drivers import get_keles, get_mirza_ulugbek, get_chilanzar, get_yunusobod
-from keyboards.default import LineMarkup
+from keyboards.default import LineMarkup, DriverMarkup
 from keyboards.default.markup import Stop_Next
 from states import Way_work
 from loader import dp, db, bot
@@ -86,6 +86,12 @@ async def road_keles_work(message: types.Message):
                 reply_markup=mainMenu2
             )
         await Way_work.next()
+
+
+@dp.message_handler(text='🔙', state=Way_work.Ww1)
+async def back_line4(message: types.Message, state: FSMContext):
+    await message.answer('🔙', reply_markup=DriverMarkup)
+    await state.reset_state()
 
 
 @dp.callback_query_handler(text_contains="work")
