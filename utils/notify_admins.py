@@ -230,7 +230,7 @@ async def order_day(message: types.Message):
 async def select_prob(message: types.Message):
     problems = get_problems()
     if len(problems) == 0:
-        await message.answer("Пока что нет таких машин ")
+        await message.answer("Пока что нет никаких проблем ")
 
     # права серия номера,марко автомобилья,номер автомобил,тех паспорт,расход,user_id
 
@@ -248,7 +248,7 @@ async def select_prob(message: types.Message):
 async def select_fuel(message: types.Message):
     problems = get_FUEL()
     if len(problems) == 0:
-        await message.answer("Пока что нет таких машин ")
+        await message.answer("Пока что нет  ")
 
     # права серия номера,марко автомобилья,номер автомобил,тех паспорт,расход,user_id
 
