@@ -199,7 +199,7 @@ async def Stop_user_work(message: types.Message, state: FSMContext):
     data = await state.get_data()
     driver = data.get("driver_id")
     driver_id = int(driver)
-    date = message.date
+    date = message.date.astimezone(tz="Asia/Tashkent")
     view_road = "На работу"
     user_id1 = (data.get("id_Sprint"))
     user_id2 = int(user_id1[1])
